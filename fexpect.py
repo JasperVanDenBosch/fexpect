@@ -1,6 +1,6 @@
 # fabric extension to enable handling expected prompts
 #
-# Read more at http://ilogue.com/fexpect
+# Read more at http://ilogue.com/jasper/blog/fexpect--dealing-with-prompts-in-fabric-with-pexpect/
 #
 # This file Copyright (c) Jasper van den Bosch, ilogue, jasper@ilogue.com
 # Pexpect Copyright (c) 2012 Noah Spurrier ,see: http://www.noah.org/wiki/pexpect#License
@@ -79,4 +79,3 @@ def createScript(cmd,env):
     s+= '\t\tbreak\n'
     s+= '\n'
     return s
-
