@@ -9,7 +9,6 @@
 from fabric.state import env
 import fabric.api
 import shortuuid
-from general import resource
 from StringIO import StringIO
 
 def expect(promptexpr, response, exitAfter=-1):
@@ -41,7 +40,11 @@ def sudo(cmd):
 def wrapExpectations(cmd,env):
     script = createScript(cmd,env)
     remoteScript = '/tmp/fexpect_'+shortuuid.uuid()
-    fabric.api.put(resource('pexpect.py'),'/tmp/')
+    import pexpect
+    pexpect_module = pexpect.__file__
+    if pexpect_module.endswith('.pyc'):
+        pexpect_module = pexpect_module[:-1]
+    fabric.api.put(pexpect_module,'/tmp/')
     fabric.api.put(StringIO(script),remoteScript)
     wrappedCmd = 'python '+remoteScript
     return wrappedCmd
