@@ -1,0 +1,4 @@
+*.pyc
+dist/
+env/
+fexpect.egg-info/
