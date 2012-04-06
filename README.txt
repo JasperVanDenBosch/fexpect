@@ -9,17 +9,18 @@ COPYRIGHT / LICENSE
 
 Pexpect Copyright (c) 2012 Noah Spurrier, see: http://www.noah.org/wiki/pexpect
 this package Copyright (c) Jasper van den Bosch, ilogue, jasper@ilogue.com
+(still thinking about license, feedback welcome)
 
 USAGE
 
 from ilogue.fexpect import expect, expecting, run
 
 prompts = []
-prompts += expect(‘What is your name?’,'Jasper')
+prompts += expect('What is your name?','Jasper')
 prompts += expect('Where do you live?','Frankfurt')
 
 with expecting(prompts):
-    run(‘command’)
+    run('command')
 
 #tests:
 
