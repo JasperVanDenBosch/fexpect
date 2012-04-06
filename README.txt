@@ -22,13 +22,8 @@ prompts += expect('Where do you live?','Frankfurt')
 with expecting(prompts):
     run('command')
 
-#tests:
-
-# Run from a fabfile.py with:
-@task()
-def test():
-    from ilogue.tests import FexpectTests, runtest
-    runtest(FexpectTests)
+# You can use the included fabfile.py to run the fexpect tests:
+fab test -p 'yourlocalpassword'
 
 CONTRIBUTORS
 

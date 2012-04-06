@@ -22,6 +22,6 @@ setup(name='fexpect',
       zip_safe=False,
       install_requires=requires,
       tests_require=requires,
-      test_suite="ilogue.tests",
+      test_suite="ilogue.fexpect.tests",
       )
 

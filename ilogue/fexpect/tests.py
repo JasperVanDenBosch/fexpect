@@ -9,7 +9,7 @@ class FexpectTests(unittest.TestCase):
 
     def test_one_expectation(self):
         cmd = 'echo "Hello" && read NAME && echo "Hi $NAME."'
-        from fexpect import expect, expecting, run
+        from ilogue.fexpect import expect, expecting, run
         expectation =  expect('Hello','answer')
         with expecting(expectation):
             output = run(cmd)
@@ -17,7 +17,7 @@ class FexpectTests(unittest.TestCase):
 
     def test_two_expectations(self):
         cmd = 'echo "Hello" && read ONE && echo "bladiebla" && read TWO && echo "First $ONE than $TWO."'
-        from fexpect import expect, expecting, run
+        from ilogue.fexpect import expect, expecting, run
         exp1 =  expect('Hello','111')
         exp2 =  expect('bladiebla','222')
         with expecting(exp1+exp2):
@@ -28,7 +28,7 @@ class FexpectTests(unittest.TestCase):
     def test_order_inconsequential(self):
         #sequence shouldn't matter
         cmd = 'echo "Hello" && read ONE && echo "bladiebla" && read TWO && echo "First $ONE than $TWO."'
-        from fexpect import expect, expecting, run
+        from ilogue.fexpect import expect, expecting, run
         exp1 =  expect('Hello','111')
         exp2 =  expect('bladiebla','222')
         with expecting(exp2+exp1):
@@ -43,7 +43,7 @@ class FexpectTests(unittest.TestCase):
         script = "#!/usr/bin/python\nimport time\nfor i in range(1,8):\n\tprint(i)\n\ttime.sleep(1)"
         cmd = 'python /tmp/test.py'
         put(StringIO(script),'/tmp/test.py')
-        from fexpect import expect, expecting, run
+        from ilogue.fexpect import expect, expecting, run
         exp1 =  expect('Hello','111')
         exp2 =  expect('3','expected',exitAfter=0)
         t = time.time()
