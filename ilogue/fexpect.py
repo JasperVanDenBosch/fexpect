@@ -1,11 +1,3 @@
-# fabric extension to enable handling expected prompts
-#
-# Read more at http://ilogue.com/jasper/blog/fexpect--dealing-with-prompts-in-fabric-with-pexpect/
-#
-# This file Copyright (c) Jasper van den Bosch, ilogue, jasper@ilogue.com
-# Pexpect Copyright (c) 2012 Noah Spurrier ,see: http://www.noah.org/wiki/pexpect#License
-
-
 from fabric.state import env
 import fabric.api
 import shortuuid
@@ -28,7 +20,7 @@ class ExpectationContext(object):
         env.expectations = []
 
 def run(cmd):
-    #sudo wrapper
+    #run wrapper
     wrappedCmd = wrapExpectations(cmd,env)
     return fabric.api.run(wrappedCmd)
 

@@ -1,1 +1,0 @@
-from fexpect import expect, expecting, run, sudo

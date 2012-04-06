@@ -1,16 +1,3 @@
-# fabric extension to enable handling expected prompts
-#
-# Read more at http://ilogue.com/jasper/blog/fexpect--dealing-with-prompts-in-fabric-with-pexpect/
-#
-# This file Copyright (c) Jasper van den Bosch, ilogue, jasper@ilogue.com
-# Pexpect Copyright (c) 2012 Noah Spurrier ,see: http://www.noah.org/wiki/pexpect#License
-
-# Run from a fabfile.py with:
-#@task()
-#def test():
-#    from tests import FexpectTests, runtest
-#    runtest(FexpectTests)
-
 import unittest
 from fabric.api import *
 
