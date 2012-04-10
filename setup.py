@@ -3,14 +3,14 @@ from setuptools import setup, find_packages
 requires = ['fabric','pexpect','shortuuid']
 
 setup(name='fexpect',
-      version='0.0',
+      version='0.1',
       description='extension of fabric for handling prompts with pexpect',
       long_description='',
       classifiers=[
         "Programming Language :: Python",
         "Intended Audience :: System Administrators",
         "License :: Other/Proprietary License",
-        "Development Status :: 1 - Planning"
+        "Development Status :: 3 - Alpha"
         ],
       author='Jasper van den Bosch',
       author_email='jasper@ilogue.com',

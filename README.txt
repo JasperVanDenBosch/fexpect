@@ -21,13 +21,19 @@ usage
     prompts += expect('Where do you live?','Frankfurt')
 
     with expecting(prompts):
-        run('command') 
+        run('command')
 
 You can use the included fabfile.py to run the fexpect tests:
 
 ::
 
     fab test -p 'yourlocalpassword'
+
+Note however that the tests may have different requirements (more recent fabric version). You can install these with the traditional:
+
+::
+
+    python setup.py test
 
 contributors
 ============
