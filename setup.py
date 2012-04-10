@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-requires = ['fabric>=1.0','pexpect','shortuuid']
+requires = ['fabric','pexpect','shortuuid']
 
 setup(name='fexpect',
       version='0.0',
@@ -21,7 +21,7 @@ setup(name='fexpect',
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
-      tests_require=requires,
+      tests_require=['fabric>=1.0','pexpect','shortuuid'],
       test_suite="ilogue.fexpect.tests",
       )
 
