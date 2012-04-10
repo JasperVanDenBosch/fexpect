@@ -2,8 +2,9 @@ fexpect
 
 Fexpect is an extension to fabric for handling prompts with pexpect scripts.
 
-Original blogpost:
+blogpostz:
 http://ilogue.com/jasper/blog/fexpect--dealing-with-prompts-in-fabric-with-pexpect/
+http://ilogue.com/jasper/blog/improved-fexpect-now-on-pypi/
 
 COPYRIGHT / LICENSE
 
