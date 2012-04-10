@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-requires = ['fabric','pexpect','shortuuid']
+requires = ['fabric>=1.0','pexpect','shortuuid']
 
 setup(name='fexpect',
       version='0.0',
