@@ -10,13 +10,18 @@ def expect(promptexpr, response, exitAfter=-1):
 def expecting(e):
     return ExpectationContext(e)
 
-def run(cmd):
+def run(cmd, **kwargs):
     #run wrapper
     wrappedCmd = wrapExpectations(cmd)
-    return fabric.api.run(wrappedCmd)
+    return fabric.api.run(wrappedCmd, **kwargs)
 
-def sudo(cmd):
+def sudo(cmd, **kwargs):
     #sudo wrapper
     wrappedCmd = wrapExpectations(cmd)
-    return fabric.api.sudo(wrappedCmd)
+    return fabric.api.sudo(wrappedCmd, **kwargs)
+
+def local(cmd, **kwargs):
+    #run wrapper
+    wrappedCmd = wrapExpectations(cmd)
+    return fabric.api.local(wrappedCmd, **kwargs)
 

@@ -53,6 +53,14 @@ class FexpectTests(unittest.TestCase):
         self.assertGreater(elapsed,2)
         self.assertLess(elapsed,4)
 
+    def test_one_expectation_local(self):
+        cmd = 'echo "Hello" && read NAME && echo "Hi $NAME."'
+        from ilogue.fexpect import expect, expecting, local
+        expectation =  expect('Hello','answer')
+        with expecting(expectation):
+            output = local(cmd,capture=True)
+        self.assertIn('answer',output)
+
     def tryOrFailOnPrompt(self,method,args):
         try:
             with settings(abort_on_prompts=True):
