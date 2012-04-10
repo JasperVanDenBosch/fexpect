@@ -1,34 +1,37 @@
+=======
 fexpect
+=======
 
 Fexpect is an extension to fabric for handling prompts with pexpect scripts.
 
-blogpostz:
-http://ilogue.com/jasper/blog/fexpect--dealing-with-prompts-in-fabric-with-pexpect/
-http://ilogue.com/jasper/blog/improved-fexpect-now-on-pypi/
+Provisional documentation in these blogposts:
 
-COPYRIGHT / LICENSE
+* http://ilogue.com/jasper/blog/fexpect--dealing-with-prompts-in-fabric-with-pexpect/
+* http://ilogue.com/jasper/blog/improved-fexpect-now-on-pypi/
 
-Pexpect Copyright (c) 2012 Noah Spurrier, see: http://www.noah.org/wiki/pexpect
-this package Copyright (c) Jasper van den Bosch, ilogue, jasper@ilogue.com
-(still thinking about license, feedback welcome)
+usage
+=====
 
-USAGE
+::
 
-from ilogue.fexpect import expect, expecting, run
+    from ilogue.fexpect import expect, expecting, run
 
-prompts = []
-prompts += expect('What is your name?','Jasper')
-prompts += expect('Where do you live?','Frankfurt')
+    prompts = []
+    prompts += expect('What is your name?','Jasper')
+    prompts += expect('Where do you live?','Frankfurt')
 
-with expecting(prompts):
-    run('command')
+    with expecting(prompts):
+        run('command') 
 
-# You can use the included fabfile.py to run the fexpect tests:
-fab test -p 'yourlocalpassword'
+You can use the included fabfile.py to run the fexpect tests:
 
-CONTRIBUTORS
+::
 
-Jasper van den Bosch - ilogue
-Michael Ivanov
+    fab test -p 'yourlocalpassword'
 
+contributors
+============
+
+* Jasper van den Bosch - ilogue
+* Michael Ivanov
 
