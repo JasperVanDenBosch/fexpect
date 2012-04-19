@@ -1,4 +1,4 @@
-import os, shutil
+import sys, os, shutil
 
 if len(sys.argv)<2:
     sys.exit('No keyword given to cleanup.')
