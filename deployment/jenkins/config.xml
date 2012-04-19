@@ -69,7 +69,7 @@
       <command>env/bin/fab test</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>env/bin/python python setup.py sdist upload</command>
+      <command>env/bin/python setup.py sdist upload</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
