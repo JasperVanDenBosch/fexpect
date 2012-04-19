@@ -54,7 +54,22 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>python workingcopy/deployment/cleanup.py</command>
+      <command>python deployment/cleanup.py fexpect</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>virtualenv env --no-site-packages</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>env/bin/python setup.py sdist --dist-dir=$WORKSPACE</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>env/bin/pip install --use-mirrors fexpect-*</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>env/bin/python setup.py test</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>env/bin/python python setup.py sdist upload</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
