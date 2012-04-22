@@ -1,9 +1,10 @@
 from setuptools import setup, find_packages
+from version import get_git_version
 
 requires = ['fabric','pexpect','shortuuid']
 
 setup(name='fexpect',
-      version='0.1',
+      version=get_git_version(),
       description='extension of fabric for handling prompts with pexpect',
       long_description='',
       classifiers=[

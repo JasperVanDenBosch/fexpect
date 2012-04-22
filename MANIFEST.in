@@ -1,1 +1,2 @@
 prune env
+include RELEASE-VERSION
