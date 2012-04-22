@@ -1,9 +1,13 @@
 import unittest
+import sys
 from fabric.api import *
+
 
 def runtest(testclass):
     suite = unittest.TestLoader().loadTestsFromTestCase(testclass)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    testResult = unittest.TextTestRunner(verbosity=2).run(suite)
+    if not testResult.wasSuccessful():
+        sys.exit('[fexpect test wrapper] One or more tests failed!')
 
 class FexpectTests(unittest.TestCase):
 
