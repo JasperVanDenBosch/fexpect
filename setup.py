@@ -10,8 +10,8 @@ setup(name='fexpect',
       classifiers=[
         "Programming Language :: Python",
         "Intended Audience :: System Administrators",
-        "License :: Other/Proprietary License",
-        "Development Status :: 3 - Alpha"
+        "License :: OSI Approved :: BSD License",
+        "Development Status :: 4 - Beta"
         ],
       author='Jasper van den Bosch',
       author_email='jasper@ilogue.com',
