@@ -9,6 +9,8 @@ Provisional documentation in these blogposts:
 * http://ilogue.com/jasper/blog/fexpect--dealing-with-prompts-in-fabric-with-pexpect/
 * http://ilogue.com/jasper/blog/improved-fexpect-now-on-pypi/
 
+Seems it doesn't work well with easy_install, please install with pip. Let me know if you know how to fix this.
+
 usage
 =====
 
