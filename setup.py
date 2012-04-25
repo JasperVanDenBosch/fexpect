@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 from version import get_git_version
 
-requires = ['fabric','pexpect','shortuuid']
+requires = ['fabric','pexpect','shortuuid','setuptools']
 
 setup(name='fexpect',
       version=get_git_version(),
