@@ -78,6 +78,9 @@ def get_git_version(abbrev=4):
 
     version = call_git_describe(abbrev)
 
+    #adapt to PEP 386 compatible versioning scheme
+    version = pep386adapt(version)
+
     # If that doesn't work, fall back on the value that's in
     # RELEASE-VERSION.
 
@@ -97,6 +100,13 @@ def get_git_version(abbrev=4):
 
     # Finally, return the current version.
 
+    return version
+
+def pep386adapt(version):
+    # adapt git-describe version to be in line with PEP 386
+    parts = version.split('-')
+    parts[-2] = 'post'+parts[-2]
+    version = '.'.join(parts[:-1])
     return version
 
 
