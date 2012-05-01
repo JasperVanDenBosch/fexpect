@@ -79,7 +79,8 @@ def get_git_version(abbrev=4):
     version = call_git_describe(abbrev)
 
     #adapt to PEP 386 compatible versioning scheme
-    version = pep386adapt(version)
+    if version:
+        version = pep386adapt(version)
 
     # If that doesn't work, fall back on the value that's in
     # RELEASE-VERSION.
