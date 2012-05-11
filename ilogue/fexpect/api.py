@@ -21,7 +21,7 @@ def sudo(cmd, **kwargs):
     return fabric.api.sudo(wrappedCmd, **kwargs)
 
 def local(cmd, **kwargs):
-    #run wrapper
+    #local wrapper
     wrappedCmd = wrapExpectations(cmd)
     return fabric.api.local(wrappedCmd, **kwargs)
 
