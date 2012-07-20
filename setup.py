@@ -1,16 +1,17 @@
 from setuptools import setup, find_packages
+from version import get_git_version
 
-requires = ['fabric','pexpect','shortuuid']
+requires = ['fabric','pexpect','shortuuid','setuptools']
 
 setup(name='fexpect',
-      version='0.1',
+      version=get_git_version(),
       description='extension of fabric for handling prompts with pexpect',
       long_description='',
       classifiers=[
         "Programming Language :: Python",
         "Intended Audience :: System Administrators",
-        "License :: Other/Proprietary License",
-        "Development Status :: 3 - Alpha"
+        "License :: OSI Approved :: BSD License",
+        "Development Status :: 4 - Beta"
         ],
       author='Jasper van den Bosch',
       author_email='jasper@ilogue.com',

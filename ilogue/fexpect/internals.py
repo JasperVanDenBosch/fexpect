@@ -27,6 +27,7 @@ def wrapExpectations(cmd):
     return wrappedCmd
 
 def createScript(cmd):
+    useShell =fabric.state.env.shell
     to = 30*60 # readline timeout 8 hours
     #write header:
     s = '#!/usr/bin/python\n'
@@ -39,7 +40,8 @@ def createScript(cmd):
         s+= '"{0}",'.format(e[0])
     s+= ']\n'
     #start
-    s+= """child = pexpect.spawn('/bin/bash -c "{0}"',timeout={1})\n""".format(cmd,to)
+    spwnTem = """child = pexpect.spawn('{shellPrefix}{shell} "{cmd}"',timeout={to})\n"""
+    s+= spwnTem.format(shell=useShell,cmd=cmd,to=to,shellPrefix=('' if useShell.startswith('/') else '/bin/'))
     s+= "child.logfile = sys.stdout\n"
     s+= "while True:\n"
     s+= "\ttry:\n"

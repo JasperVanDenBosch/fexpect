@@ -65,6 +65,18 @@ class FexpectTests(unittest.TestCase):
             output = local(cmd,capture=True)
         self.assertIn('answer',output)
 
+    def test_can_change_shell(self):
+        cmd = 'ps && echo "Hello" && read NAME && echo "Hi $NAME."'
+        from ilogue.fexpect import expect, expecting, run
+        import fabric
+        expectation =  expect('Hello','answer')
+        backupenv = fabric.state.env
+        fabric.state.env.shell = 'sh -c'
+        with expecting(expectation):
+            output = run(cmd)
+        fabric.state.env = backupenv
+        self.assertIn('00 sh',output)
+
     def tryOrFailOnPrompt(self,method,args):
         try:
             with settings(abort_on_prompts=True):
