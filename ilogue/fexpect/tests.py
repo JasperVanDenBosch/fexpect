@@ -77,6 +77,24 @@ class FexpectTests(unittest.TestCase):
         fabric.state.env = backupenv
         self.assertIn('00 sh',output)
 
+    def test_mixed_case(self):
+        cmd1 = 'expr 5 + 5'
+        cmd2 = 'read -p Name: NAME && echo Hi $NAME.'
+        cmd3 = 'expr 18 / 3'
+
+        from ilogue.fexpect import expect, expecting, run
+        import fabric
+
+        output1 = run(cmd1)
+        expectation =  expect('Name:','Bill')
+        with expecting(expectation):
+            output2 = run(cmd2)
+        output3 = run(cmd3)
+
+        self.assertIn('10',output1)
+        self.assertIn('Hi Bill.',output2)
+        self.assertIn('6',output3)
+
     def tryOrFailOnPrompt(self,method,args):
         try:
             with settings(abort_on_prompts=True):
