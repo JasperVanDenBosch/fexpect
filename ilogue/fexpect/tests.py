@@ -95,6 +95,28 @@ class FexpectTests(unittest.TestCase):
         self.assertIn('Hi Bill.',output2)
         self.assertIn('6',output3)
 
+    def test_quotes(self):
+        cmd1 = 'read -p "Prompt1:" RESP1 && echo Received $RESP1.'
+        cmd2 = "read -p 'Prompt2:' RESP2 && echo Received $RESP2."
+        cmd3 = """read -p 'Prompt3:' -n "20" RESP3 && echo Received $RESP3."""
+
+        from ilogue.fexpect import expect, expecting, run
+        import fabric
+
+        expectation =  []
+        expectation += expect('Prompt1:','Foo')
+        expectation += expect('Prompt2:','Bar')
+        expectation += expect('Prompt3:','Baz')
+
+        with expecting(expectation):
+            output1 = run(cmd1)
+            output2 = run(cmd2)
+            output3 = run(cmd3)
+
+        self.assertIn('Received Foo',output1)
+        self.assertIn('Received Bar',output2)
+        self.assertIn('Received Baz',output3)
+
     def tryOrFailOnPrompt(self,method,args):
         try:
             with settings(abort_on_prompts=True):
