@@ -7,8 +7,8 @@ def expect(promptexpr, response, exitAfter=-1):
         return [(promptexpr, response, exitAfter)]
     return [(promptexpr, response)]
 
-def expecting(e):
-    return ExpectationContext(e)
+def expecting(e, show_response=True):
+    return ExpectationContext(e, show_response)
 
 def run(cmd, **kwargs):
     #run wrapper
