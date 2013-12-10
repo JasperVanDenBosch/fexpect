@@ -40,7 +40,7 @@ def createScript(cmd):
         s+= '"{0}",'.format(e[0])
     s+= ']\n'
     #start
-    spwnTem = """child = pexpect.spawn('{shellPrefix}{shell} "{cmd}"',timeout={to})\n"""
+    spwnTem = """child = pexpect.spawn(\"\"\"{shellPrefix}{shell} "{cmd}" \"\"\",timeout={to})\n"""
     s+= spwnTem.format(shell=useShell,cmd=cmd,to=to,shellPrefix=('' if useShell.startswith('/') else '/bin/'))
     s+= "child.logfile = sys.stdout\n"
     s+= "while True:\n"

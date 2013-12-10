@@ -11,17 +11,23 @@ def expecting(e):
     return ExpectationContext(e)
 
 def run(cmd, **kwargs):
-    #run wrapper
-    wrappedCmd = wrapExpectations(cmd)
-    return fabric.api.run(wrappedCmd, **kwargs)
+    #run wrapper 
+    if 'expectations' in fabric.state.env and \
+        len(fabric.state.env.expectations) > 0:
+        cmd = wrapExpectations(cmd)
+    return fabric.api.run(cmd, **kwargs)
 
 def sudo(cmd, **kwargs):
     #sudo wrapper
-    wrappedCmd = wrapExpectations(cmd)
-    return fabric.api.sudo(wrappedCmd, **kwargs)
+    if 'expectations' in fabric.state.env and \
+        len(fabric.state.env.expectations) > 0:
+        cmd = wrapExpectations(cmd)
+    return fabric.api.sudo(cmd, **kwargs)
 
 def local(cmd, **kwargs):
     #local wrapper
-    wrappedCmd = wrapExpectations(cmd)
-    return fabric.api.local(wrappedCmd, **kwargs)
+    if 'expectations' in fabric.state.env and \
+        len(fabric.state.env.expectations) > 0:
+        cmd = wrapExpectations(cmd)
+    return fabric.api.local(cmd, **kwargs)
 
