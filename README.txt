@@ -42,6 +42,7 @@ Note however that the tests may have different requirements (more recent fabric 
 contributors
 ============
 
-* Jasper van den Bosch - ilogue
+* Jasper van den Bosch / ilogue
 * Michael Ivanov
+* Mitsuhiro Koga
 
