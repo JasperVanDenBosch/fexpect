@@ -45,4 +45,5 @@ contributors
 * Jasper van den Bosch / ilogue
 * Michael Ivanov
 * Mitsuhiro Koga
+* Erik Dykema
 

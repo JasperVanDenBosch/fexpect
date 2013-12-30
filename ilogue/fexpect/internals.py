@@ -2,7 +2,6 @@ import shortuuid
 from StringIO import StringIO
 import fabric
 
-
 class ExpectationContext(object):
     def __init__(self,expectations):
         self.expectations = expectations
@@ -23,6 +22,14 @@ def wrapExpectations(cmd):
     # on /tmp/pexpect.py
     fabric.api.put(pexpect_module,'/tmp/', mode=0777) 
     fabric.api.put(StringIO(script),remoteScript)
+    wrappedCmd = 'python '+remoteScript
+    return wrappedCmd
+
+def wrapExpectationsLocal(cmd):
+    script = createScript(cmd)
+    remoteScript = '/tmp/fexpect_'+shortuuid.uuid()
+    with open(remoteScript, 'w') as filehandle:
+        filehandle.write(script)
     wrappedCmd = 'python '+remoteScript
     return wrappedCmd
 
