@@ -1,5 +1,5 @@
 import fabric.api
-from ilogue.fexpect.internals import wrapExpectations, ExpectationContext
+from ilogue.fexpect.internals import wrapExpectations, wrapExpectationsLocal, ExpectationContext
 
 
 def expect(promptexpr, response, exitAfter=-1):
@@ -28,6 +28,6 @@ def local(cmd, **kwargs):
     #local wrapper
     if 'expectations' in fabric.state.env and \
         len(fabric.state.env.expectations) > 0:
-        cmd = wrapExpectations(cmd)
+        cmd = wrapExpectationsLocal(cmd)
     return fabric.api.local(cmd, **kwargs)
 
