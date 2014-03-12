@@ -46,4 +46,5 @@ contributors
 * Michael Ivanov
 * Mitsuhiro Koga
 * Erik Dykema
+* Peter Conerly
 
