@@ -7,6 +7,24 @@ def expect(promptexpr, response, exitAfter=-1):
         return [(promptexpr, response, exitAfter)]
     return [(promptexpr, response)]
 
+# Use inside an expect(), like:  `expect('>>>', controlchar('D'))`
+def controlchar(char):
+    char = char.lower()
+    a = ord(char)
+    if a >= 97 and a <= 122:
+        a = a - ord('a') + 1
+        return chr(a)
+    d = {'@': 0, '`': 0,
+        '[': 27, '{': 27,
+        '\\': 28, '|': 28,
+        ']': 29, '}': 29,
+        '^': 30, '~': 30,
+        '_': 31,
+        '?': 127}
+    if char not in d:
+        return 0
+    return chr(d[char])
+
 def expecting(e):
     return ExpectationContext(e)
 

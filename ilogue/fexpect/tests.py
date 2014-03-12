@@ -117,6 +117,20 @@ class FexpectTests(unittest.TestCase):
         self.assertIn('Received Bar',output2)
         self.assertIn('Received Baz',output3)
 
+    def test_controlchar(self):
+        cmd = 'python'
+        from ilogue.fexpect import controlchar, expect, expecting, run
+        import fabric
+
+        expectation =  []
+        expectation += expect(">>>", controlchar('C'))
+        expectation += expect('KeyboardInterrupt', controlchar('D'))
+
+        with expecting(expectation):
+            output = run(cmd)
+
+        self.assertIn('KeyboardInterrupt',output)
+
     def tryOrFailOnPrompt(self,method,args):
         try:
             with settings(abort_on_prompts=True):
