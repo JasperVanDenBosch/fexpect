@@ -1,1 +1,1 @@
-from ilogue.fexpect.api import expect, expecting, run, sudo, local
+from ilogue.fexpect.api import expect, controlchar, expecting, run, sudo, local
