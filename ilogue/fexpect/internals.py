@@ -15,7 +15,7 @@ def wrapExpectations(cmd):
     script = createScript(cmd)
     remoteScript = '/tmp/fexpect_'+shortuuid.uuid()
     import imp
-    pexpect_module = imp.find_module('pexpect')[1]
+    _, pexpect_module, _ = imp.find_module('pexpect')
     if pexpect_module.endswith('.pyc'):
         pexpect_module = pexpect_module[:-1]
     # If mode not set explicitly, and this is run as a privileged user, 
