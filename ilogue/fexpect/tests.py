@@ -138,3 +138,20 @@ class FexpectTests(unittest.TestCase):
         except SystemExit as promptAbort:
             self.fail("There was an unexpected (password) prompt.")
         return result 
+
+    def test_multimatch(self):
+        """ Match same prompt but with different responses """
+
+        cmd =  'echo "name" && read NAME1 && echo "name is $NAME1" && echo "name" && read NAME2 && echo "name is $NAME2"'
+
+        from ilogue.fexpect import expecting, expect, run
+
+        expectation = []
+        expectation += expect('name', 'Ford')
+        expectation += expect('name', 'Arthur')
+
+        with expecting(expectation):
+            output = run(cmd)
+
+        self.assertIn('Ford', output)
+        self.assertIn('Arthur', output)
