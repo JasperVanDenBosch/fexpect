@@ -58,6 +58,7 @@ def createScript(cmd):
         ifkeyw = 'if' if i == 0 else 'elif'
         s+= "\t\t{0} i == {1}:\n".format(ifkeyw,i)
         s+= "\t\t\tchild.sendline('{0}')\n".format(e[1])
+        s+= "\t\t\texpectations[i]=\"__MANGLE__\"\n\n"
         if len(e)>2:
             s+= "\t\t\tsleep({0})\n".format(e[2])
             s+= "\t\t\tprint('Exiting fexpect for expected exit.')\n"
