@@ -47,4 +47,5 @@ contributors
 * Mitsuhiro Koga
 * Erik Dykema
 * Peter Conerly
+* Robert J Carr
 
