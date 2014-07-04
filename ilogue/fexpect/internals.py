@@ -14,13 +14,13 @@ def wrapExpectations(cmd):
     script = createScript(cmd)
     remoteScript = '/tmp/fexpect_'+shortuuid.uuid()
     import pexpect
-    pexpect_module = pexpect.__file__
-    if pexpect_module.endswith('.pyc'):
-        pexpect_module = pexpect_module[:-1]
+    pexpect_loader= pexpect.__file__
+    final_dir_index = pexpect_loader.find('pexpect') + len('pexpect')
+    pexpect_loader= pexpect_loader[:final_dir_index]
     # If mode not set explicitly, and this is run as a privileged user, 
     # later command from an unpriviliged user will fail due to the permissions
     # on /tmp/pexpect.py
-    fabric.api.put(pexpect_module,'/tmp/', mode=0777) 
+    fabric.api.put(pexpect_loader,'/tmp/', mode=0777) 
     fabric.api.put(StringIO(script),remoteScript)
     wrappedCmd = 'python '+remoteScript
     return wrappedCmd
