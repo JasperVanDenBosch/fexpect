@@ -32,20 +32,29 @@ def run(cmd, **kwargs):
     #run wrapper 
     if 'expectations' in fabric.state.env and \
         len(fabric.state.env.expectations) > 0:
-        cmd = wrapExpectations(cmd)
-    return fabric.api.run(cmd, **kwargs)
+        cmd, script, remote_pexpect = wrapExpectations(cmd)
+    ret = fabric.api.run(cmd, **kwargs)
+    fabric.api.run('rm %s' % script)
+    fabric.api.sudo('rm %s' % remote_pexpect)
+    return ret
 
 def sudo(cmd, **kwargs):
     #sudo wrapper
     if 'expectations' in fabric.state.env and \
         len(fabric.state.env.expectations) > 0:
-        cmd = wrapExpectations(cmd)
-    return fabric.api.sudo(cmd, **kwargs)
+        cmd, script, remote_pexpect = wrapExpectations(cmd)
+    ret = fabric.api.sudo(cmd, **kwargs)
+    fabric.api.sudo('rm %s' % script)
+    fabric.api.sudo('rm %s' % remote_pexpect)
+    return ret
 
 def local(cmd, **kwargs):
     #local wrapper
     if 'expectations' in fabric.state.env and \
         len(fabric.state.env.expectations) > 0:
-        cmd = wrapExpectationsLocal(cmd)
-    return fabric.api.local(cmd, **kwargs)
+        cmd, script = wrapExpectationsLocal(cmd)
+    ret = fabric.api.local(cmd, **kwargs)
+    fabric.api.local('rm %s' % script)
+    return ret
+
 
