@@ -1,6 +1,8 @@
 import shortuuid
 from StringIO import StringIO
 import fabric
+import os
+tmp_dir = '/tmp/'
 
 class ExpectationContext(object):
     def __init__(self,expectations):
@@ -12,7 +14,7 @@ class ExpectationContext(object):
 
 def wrapExpectations(cmd):
     script = createScript(cmd)
-    remoteScript = '/tmp/fexpect_'+shortuuid.uuid()
+    remoteScript = tmp_dir+'fexpect_'+shortuuid.uuid()
     import pexpect
     pexpect_module = pexpect.__file__
     if pexpect_module.endswith('.pyc'):
@@ -20,18 +22,19 @@ def wrapExpectations(cmd):
     # If mode not set explicitly, and this is run as a privileged user, 
     # later command from an unpriviliged user will fail due to the permissions
     # on /tmp/pexpect.py
-    fabric.api.put(pexpect_module,'/tmp/', mode=0777) 
+    remote_pexpect_module = tmp_dir+os.path.basename(pexpect_module)
+    fabric.api.put(pexpect_module,remote_pexpect_module, mode=0777) 
     fabric.api.put(StringIO(script),remoteScript)
     wrappedCmd = 'python '+remoteScript
-    return wrappedCmd
+    return wrappedCmd, remoteScript, remote_pexpect_module
 
 def wrapExpectationsLocal(cmd):
     script = createScript(cmd)
-    remoteScript = '/tmp/fexpect_'+shortuuid.uuid()
+    remoteScript = tmp_dir+'fexpect_'+shortuuid.uuid()
     with open(remoteScript, 'w') as filehandle:
         filehandle.write(script)
     wrappedCmd = 'python '+remoteScript
-    return wrappedCmd
+    return wrappedCmd, remoteScript
 
 def createScript(cmd):
     useShell =fabric.state.env.shell
