@@ -155,3 +155,20 @@ class FexpectTests(unittest.TestCase):
 
         self.assertIn('Ford', output)
         self.assertIn('Arthur', output)
+
+    def test_show_response(self):
+        cmd = 'echo "Hello" && read -s NAME'
+        from ilogue.fexpect import expect, expecting, run
+        expectation =  expect('Hello','answer')
+        with expecting(expectation, True):
+            output = run(cmd)
+        self.assertIn('answer',output)
+
+    def test_hide_response(self):
+        cmd = 'echo "Hello" && read -s NAME'
+        from ilogue.fexpect import expect, expecting, run
+        expectation =  expect('Hello','answer')
+        with expecting(expectation, False):
+            output = run(cmd)
+        self.assertNotIn('answer',output)
+

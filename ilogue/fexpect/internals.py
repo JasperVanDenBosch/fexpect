@@ -3,12 +3,15 @@ from StringIO import StringIO
 import fabric
 
 class ExpectationContext(object):
-    def __init__(self,expectations):
+    def __init__(self, expectations, show_response):
         self.expectations = expectations
+        self.show_response = show_response
     def __enter__(self):
         fabric.state.env.expectations = self.expectations
+        fabric.state.env.show_response = self.show_response
     def __exit__(self, type, value, tb):
         fabric.state.env.expectations = []
+        fabric.state.env.show_response = True
 
 def wrapExpectations(cmd):
     script = createScript(cmd)
@@ -49,7 +52,8 @@ def createScript(cmd):
     #start
     spwnTem = """child = pexpect.spawn(\"\"\"{shellPrefix}{shell} "{cmd}" \"\"\",timeout={to})\n"""
     s+= spwnTem.format(shell=useShell,cmd=cmd,to=to,shellPrefix=('' if useShell.startswith('/') else '/bin/'))
-    s+= "child.logfile = sys.stdout\n"
+    logfile = 'logfile' if fabric.state.env.show_response else 'logfile_read'
+    s+= "child.{0} = sys.stdout\n".format(logfile)
     s+= "while True:\n"
     s+= "\ttry:\n"
     s+= "\t\ti = child.expect(expectations)\n"

@@ -25,8 +25,8 @@ def controlchar(char):
         return 0
     return chr(d[char])
 
-def expecting(e):
-    return ExpectationContext(e)
+def expecting(e, show_response=True):
+    return ExpectationContext(e, show_response)
 
 def run(cmd, **kwargs):
     #run wrapper 
