@@ -2,7 +2,6 @@ import shortuuid
 from StringIO import StringIO
 import fabric
 
-
 class ExpectationContext(object):
     def __init__(self, expectations, show_response):
         self.expectations = expectations
@@ -29,6 +28,14 @@ def wrapExpectations(cmd):
     wrappedCmd = 'python '+remoteScript
     return wrappedCmd
 
+def wrapExpectationsLocal(cmd):
+    script = createScript(cmd)
+    remoteScript = '/tmp/fexpect_'+shortuuid.uuid()
+    with open(remoteScript, 'w') as filehandle:
+        filehandle.write(script)
+    wrappedCmd = 'python '+remoteScript
+    return wrappedCmd
+
 def createScript(cmd):
     useShell =fabric.state.env.shell
     to = 30*60 # readline timeout 8 hours
@@ -43,7 +50,7 @@ def createScript(cmd):
         s+= '"{0}",'.format(e[0])
     s+= ']\n'
     #start
-    spwnTem = """child = pexpect.spawn('{shellPrefix}{shell} "{cmd}"',timeout={to})\n"""
+    spwnTem = """child = pexpect.spawn(\"\"\"{shellPrefix}{shell} "{cmd}" \"\"\",timeout={to})\n"""
     s+= spwnTem.format(shell=useShell,cmd=cmd,to=to,shellPrefix=('' if useShell.startswith('/') else '/bin/'))
     logfile = 'logfile' if fabric.state.env.show_response else 'logfile_read'
     s+= "child.{0} = sys.stdout\n".format(logfile)
@@ -55,6 +62,7 @@ def createScript(cmd):
         ifkeyw = 'if' if i == 0 else 'elif'
         s+= "\t\t{0} i == {1}:\n".format(ifkeyw,i)
         s+= "\t\t\tchild.sendline('{0}')\n".format(e[1])
+        s+= "\t\t\texpectations[i]=\"__MANGLE__\"\n\n"
         if len(e)>2:
             s+= "\t\t\tsleep({0})\n".format(e[2])
             s+= "\t\t\tprint('Exiting fexpect for expected exit.')\n"
